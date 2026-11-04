@@ -1,0 +1,475 @@
+/* =========================================================
+   PORTFOLIO STYLESHEET: Binang Bupha Destiny
+    PART A
+   (the control panel). 
+   Part B only USES those values and should rarely need touching.
+
+   PART A: CONTROL PANEL (edit here)
+     A1. Colors
+     A2. Fonts and text sizes
+     A3. Spacing and sizes
+     A4. Effects (hover, rounding, speed)
+
+   PART B: STYLES (reads from Part A)
+     B1. Reset and base
+     B2. Typography
+     B3. Header and navigation
+     B4. Hero
+     B5. Sections (shared layout)
+     B6. Buttons
+     B7. Experience and education
+     B8. Project cards
+     B9. Skills
+     B10. Contact
+     B11. Footer
+     B12. Accessibility
+     B13. Responsive (larger screens)
+     B14. Scroll effects (used by script.js)
+   ========================================================= */
+
+
+/* #########################################################
+   PART A: CONTROL PANEL
+   ######################################################### */
+:root {
+
+  /* -------------------------------------------------------
+     A1. COLORS
+     Names describe the JOB of the color, not the color itself.
+     So change the value freely, but keep the pairs readable:
+       --color-text   must contrast with --color-bg
+       --color-text   must contrast with --color-surface
+       --color-button-text must contrast with --color-button-bg
+     ------------------------------------------------------- */
+  --color-bg:            #F5F1E8;  /* page background (cream) */
+  --color-surface:       #EBE5D6;  /* project cards (darker cream) */
+  --color-text:          #1A1A18;  /* main text (black) */
+  --color-text-muted:    #5A5A55;  /* secondary text (grey) */
+  --color-border:        #D4D1C7;  /* thin divider lines (light grey) */
+  --color-border-hover:  #6F6F69;  /* card border when hovered */
+  --color-button-bg:     #1A1A18;  /* main button fill */
+  --color-button-text:   #F5F1E8;  /* main button text */
+
+
+  /* -------------------------------------------------------
+     A2. FONTS AND TEXT SIZES
+     ------------------------------------------------------- */
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --size-h1:       clamp(2.4rem, 7vw, 4rem);  /* your name in the hero */
+  --size-h2:       1.9rem;                    /* section titles */
+  --size-h3:       1.2rem;                    /* job titles, card titles */
+  --size-body:     1.05rem;                   /* normal paragraphs */
+  --size-tagline:  1.25rem;                   /* line under your name */
+  --size-small:    0.95rem;                   /* nav links, meta, buttons */
+  --size-eyebrow:  0.85rem;                   /* small label above name */
+  --tag-size:      0.8rem;                    /* project tags, footer */
+
+  --line-height:   1.7;
+  --eyebrow-letter-spacing: 0.12em;
+
+
+  /* -------------------------------------------------------
+     A3. SPACING AND SIZES
+     ------------------------------------------------------- */
+
+  /* Page width */
+  --content-max-width:    760px;   /* width of the centered column */
+  --page-padding-x:       5%;      /* left/right breathing room */
+
+  /* Padding inside each part of the page */
+  --header-padding-y:     1rem;
+  --hero-padding-top:     7rem;
+  --hero-padding-top-wide:9rem;    /* hero top padding on wide screens */
+  --hero-padding-bottom:  6rem;
+  --section-padding-y:    5rem;    /* top/bottom of every section */
+  --footer-padding-y:     2rem;
+  --card-padding:         1.75rem;
+  --button-padding:       0.8rem 1.6rem;
+  --tag-padding:          0.2rem 0.7rem;
+
+  /* Gaps between things */
+  --gap-nav:              1.5rem;  /* between nav links */
+  --gap-buttons:          1rem;    /* between hero buttons */
+  --gap-cards:            1.5rem;  /* between project cards */
+  --gap-skills:           2rem;    /* between skill groups */
+  --gap-tags:             0.5rem;  /* between tags */
+  --gap-entries:          2.5rem;  /* between experience entries */
+  --gap-paragraphs:       1rem;
+  --gap-list-items:       0.4rem;
+
+  /* Heading and text spacing */
+  --heading-margin-bottom:1.5rem;  /* under each section title */
+  --hero-buttons-margin-top: 2.5rem;
+  --tagline-margin-top:   1rem;
+  --tagline-max-width:    32rem;
+
+  /* Header height guess (stops sticky header covering titles) */
+  --scroll-offset:        5rem;
+
+  /* Skills column minimum width */
+  --skill-column-min:     200px;
+
+
+  /* -------------------------------------------------------
+     A4. EFFECTS
+     ------------------------------------------------------- */
+  --radius-button:        2px;
+  --radius-tag:           999px;   /* 999px = fully rounded pill */
+  --border-width:         1px;
+  --speed:                0.2s;    /* hover animation speed */
+  --card-lift:            -3px;    /* how far cards rise on hover */
+
+  /* Fade-in effect when sections scroll into view (see B14) */
+  --reveal-distance:      20px;    /* how far a section slides up as it appears */
+  --reveal-speed:         0.7s;    /* how long the fade-in takes */
+}
+
+
+/* #########################################################
+   PART B: STYLES
+   (These only read the values from Part A.)
+   ######################################################### */
+
+
+/* =========================================================
+   B1. RESET AND BASE
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--scroll-offset);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: var(--line-height);
+}
+
+ul { list-style: none; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   B2. TYPOGRAPHY
+   ========================================================= */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+h1 { font-size: var(--size-h1); }
+
+h2 {
+  font-size: var(--size-h2);
+  margin-bottom: var(--heading-margin-bottom);
+}
+
+h3 { font-size: var(--size-h3); }
+
+p + p { margin-top: var(--gap-paragraphs); }
+
+.meta {
+  color: var(--color-text-muted);
+  font-size: var(--size-small);
+  margin-bottom: 0.6rem;
+}
+
+.eyebrow {
+  color: var(--color-text-muted);
+  font-size: var(--size-eyebrow);
+  letter-spacing: var(--eyebrow-letter-spacing);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+
+/* =========================================================
+   B3. HEADER AND NAVIGATION
+   ========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem var(--gap-nav);
+  padding: var(--header-padding-y) var(--page-padding-x);
+  background: var(--color-bg);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-nav);
+  font-size: var(--size-small);
+}
+
+.nav-links a {
+  color: var(--color-text-muted);
+  transition: color var(--speed);
+}
+
+.nav-links a:hover { color: var(--color-text); }
+
+
+/* =========================================================
+   B4. HERO
+   ========================================================= */
+.hero {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--hero-padding-top) var(--page-padding-x) var(--hero-padding-bottom);
+}
+
+.tagline {
+  font-size: var(--size-tagline);
+  color: var(--color-text-muted);
+  margin-top: var(--tagline-margin-top);
+  max-width: var(--tagline-max-width);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-buttons);
+  margin-top: var(--hero-buttons-margin-top);
+}
+
+
+/* =========================================================
+   B5. SECTIONS (shared layout for every section)
+   ========================================================= */
+.section {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--section-padding-y) var(--page-padding-x);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+
+/* =========================================================
+   B6. BUTTONS
+   ========================================================= */
+.btn {
+  display: inline-block;
+  padding: var(--button-padding);
+  border: var(--border-width) solid var(--color-button-bg);
+  border-radius: var(--radius-button);
+  font-size: var(--size-small);
+  transition: background var(--speed), color var(--speed);
+}
+
+/* Filled button; becomes outlined on hover */
+.btn-primary {
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--color-button-bg);
+}
+
+/* Outlined button; becomes filled on hover */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-button-bg);
+}
+.btn-secondary:hover {
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+}
+
+
+/* =========================================================
+   B7. EXPERIENCE AND EDUCATION ENTRIES
+   ========================================================= */
+.entry + .entry { margin-top: var(--gap-entries); }
+
+.entry ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  color: var(--color-text-muted);
+}
+
+.entry li + li { margin-top: var(--gap-list-items); }
+
+
+/* =========================================================
+   B8. PROJECT CARDS
+   ========================================================= */
+.project-grid {
+  display: grid;
+  gap: var(--gap-cards);
+}
+
+.card {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-width) solid var(--color-border);
+  padding: var(--card-padding);
+  transition: transform var(--speed), border-color var(--speed);
+}
+
+.card:hover {
+  transform: translateY(var(--card-lift));
+  border-color: var(--color-border-hover);
+}
+
+.card h3 { margin-bottom: 0.6rem; }
+.card p  { color: var(--color-text-muted); }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-tags);
+  margin-top: 1.2rem;
+}
+
+.tags li {
+  font-size: var(--tag-size);
+  padding: var(--tag-padding);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-tag);
+  color: var(--color-text-muted);
+}
+
+
+/* =========================================================
+   B9. SKILLS
+   ========================================================= */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--skill-column-min), 1fr));
+  gap: var(--gap-skills);
+}
+
+.skills-grid h3 { margin-bottom: 0.6rem; }
+.skills-grid li { color: var(--color-text-muted); }
+
+
+/* =========================================================
+   B10. CONTACT
+   ========================================================= */
+.contact-links { margin-top: 1.5rem; }
+
+.contact-links li + li { margin-top: 0.5rem; }
+
+.contact-links a {
+  border-bottom: var(--border-width) solid var(--color-text-muted);
+  padding-bottom: 1px;
+  transition: border-color var(--speed);
+}
+
+.contact-links a:hover { border-color: var(--color-text); }
+
+
+/* =========================================================
+   B11. FOOTER
+   ========================================================= */
+.site-footer {
+  text-align: center;
+  padding: var(--footer-padding-y) var(--page-padding-x);
+  color: var(--color-text-muted);
+  font-size: var(--tag-size);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+
+/* =========================================================
+   B12. ACCESSIBILITY (visible focus for keyboard users)
+   ========================================================= */
+a:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+/* "Skip to main content" link: hidden off-screen until a keyboard user tabs to it */
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: var(--page-padding-x);
+  z-index: 20;
+  padding: var(--button-padding);
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  font-size: var(--size-small);
+  transition: top var(--speed);
+}
+
+.skip-link:focus { top: 0.5rem; }
+
+
+/* =========================================================
+   B13. RESPONSIVE: larger screens (700px wide and up)
+   Note: CSS can't use variables inside the (min-width) number,
+   so 700px is written directly here.
+   ========================================================= */
+@media (min-width: 700px) {
+  .project-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero { padding-top: var(--hero-padding-top-wide); }
+}
+
+/* Small phones (520px wide and under): tighter menu, taller header allowance */
+@media (max-width: 520px) {
+  :root {
+    --gap-nav: 1rem;         /* nav links sit closer together */
+    --scroll-offset: 7rem;   /* header wraps to two lines, so leave more room */
+  }
+}
+
+
+/* =========================================================
+   B14. SCROLL EFFECTS (these classes are added by script.js)
+   ========================================================= */
+
+/* The nav link for the section you are currently viewing */
+.nav-links a.active {
+  color: var(--color-text);
+  border-bottom: var(--border-width) solid var(--color-text);
+}
+
+/* Before a section is seen: invisible and slightly lower */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition: opacity var(--reveal-speed), transform var(--reveal-speed);
+}
+
+/* After a section is seen: fully visible, in its normal place */
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect visitors who turn off animations in their device settings */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html { scroll-behavior: auto; }
+}
